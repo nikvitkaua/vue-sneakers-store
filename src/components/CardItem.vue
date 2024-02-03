@@ -1,5 +1,5 @@
 <script setup>
- const props = defineProps({
+ defineProps({
     imageUrl: String,
     title: String,
     price: Number,
@@ -12,7 +12,7 @@
 
 <template>
   <div class="relative border bg-white border-slate-100 rounded-2xl p-8 cursor-pointer hover:-translate-y-2 hover:shadow-xl transition">
-    <img @click="onClickFavorite" :src="!isFavorite ? '/like-2.svg' : '/like-1.svg'" alt="like 1" class="absolute top-2 left-2">
+    <img @click="onClickFavorite" :src="isFavorite ? '/like-2.svg' : '/like-1.svg'" alt="like 1" class="absolute top-2 left-2">
     <img :src="imageUrl" alt="sneaker image">
     <p class="mt-2">{{ title }}</p>
 

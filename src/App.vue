@@ -1,7 +1,25 @@
 <script setup>
+import { onMounted, ref } from 'vue';
+import axios from 'axios';
+
 import MainHeader from './components/MainHeader.vue';
 import CardList from './components/CardList.vue';
 import DrawerApp from './components/DrawerApp.vue';
+
+const items = ref([]);
+
+onMounted(async () => {
+  try {
+    const { data } = await axios.get('../sneakers-data.json');
+    
+    items.value = data;
+  } catch (err) {
+    console.log(err)
+  }
+});
+
+console.log(items)
+
 </script>
 
 <template>
@@ -16,7 +34,7 @@ import DrawerApp from './components/DrawerApp.vue';
 
         <div class="flex gap-4">
           <select 
-            class="py-2 px-2 border rounded-md outline-none"
+            class="py-2 px-2 border rounded-md outline-none cursor-pointer"
           >
             <option>Name</option>
             <option>Price (low)</option>
@@ -35,7 +53,7 @@ import DrawerApp from './components/DrawerApp.vue';
       </div>
 
 
-      <CardList />
+      <CardList :items="items" />
     </div>
   </div>
 </template>
